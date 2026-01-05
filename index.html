@@ -16,7 +16,7 @@
 
   <style>
     :root{
-      /* Tema beda dari sebelumnya: Navy + Teal + Peach */
+      /* Tema beda: Navy + Teal + Peach */
       --bg:#070B18;
       --surface:#0B1128;
       --card:#0F1A3A;
@@ -331,10 +331,19 @@
         radial-gradient(180px 120px at 20% 20%, rgba(30,230,194,.18), transparent 55%),
         radial-gradient(220px 140px at 85% 35%, rgba(255,179,138,.14), transparent 55%),
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      display:grid;
-      place-items:center;
+      display:block;
     }
-    .thumb svg{width:78px; height:78px; opacity:.92; filter: drop-shadow(0 16px 30px rgba(0,0,0,.32))}
+
+    /* ==== GAMBAR PRODUK ==== */
+    .thumb-img{
+      width:100%;
+      height:100%;
+      object-fit: cover;         /* rapi crop */
+      display:block;
+      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.05);
+    }
+
     .badge{
       position:absolute;
       top:10px; left:10px;
@@ -346,6 +355,7 @@
       font-size:12.5px;
       color:rgba(244,247,255,.86);
       display:inline-flex; align-items:center; gap:8px;
+      z-index: 2;
     }
     .badge .mini-dot{
       width:7px; height:7px; border-radius:999px;
@@ -382,7 +392,7 @@
       display:flex; gap:10px;
     }
 
-    /* Floating cart-ish */
+    /* Floating WhatsApp */
     .float-wa{
       position:fixed;
       right:16px;
@@ -438,6 +448,9 @@
 </head>
 
 <body>
+  <!-- NOTE: simpan gambar produk di folder: assets/products/ -->
+  <!-- contoh: assets/products/hoodie-nimbus.jpg -->
+
   <div class="announce">
     <div class="container">
       <div class="inner">
@@ -628,11 +641,13 @@
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
         <details class="card" style="padding:16px;">
           <summary style="cursor:pointer; font-weight:850;">Apakah ini sudah siap dipakai jualan?</summary>
-          <p class="desc" style="margin-top:10px;">Ya. Tinggal ganti nama toko, nomor WhatsApp, dan data produk.</p>
+          <p class="desc" style="margin-top:10px;">Ya. Tinggal ganti nama toko, nomor WhatsApp, dan data produk + gambar.</p>
         </details>
         <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Bisa pakai foto produk sendiri?</summary>
-          <p class="desc" style="margin-top:10px;">Bisa. Kamu bisa ganti thumbnail SVG jadi gambar <code>&lt;img&gt;</code>.</p>
+          <summary style="cursor:pointer; font-weight:850;">Cara taruh gambar produk gimana?</summary>
+          <p class="desc" style="margin-top:10px;">
+            Buat folder <b>assets/products</b>, taruh gambar di situ, lalu isi field <b>image</b> pada data produk.
+          </p>
         </details>
         <details class="card" style="padding:16px;">
           <summary style="cursor:pointer; font-weight:850;">Bisa tambah kategori / filter?</summary>
@@ -688,16 +703,18 @@
     // ====== CONFIG ======
     const WA_NUMBER = "6281234567890"; // ganti nomor WA kamu
 
-    // Data produk contoh (untuk portfolio)
+    // ====== DATA PRODUK (ISI PATH GAMBAR DI image) ======
+    // Simpan file gambar di: assets/products/
+    // Contoh: assets/products/hoodie-nimbus.jpg
     const products = [
-      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller" },
-      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New" },
-      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited" },
-      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending" },
-      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift" },
-      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium" },
-      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot" },
-      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value" }
+      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller", image: "assets/products/hoodie-nimbus.jpg" },
+      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New", image: "assets/products/tshirt-aurora.jpg" },
+      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited", image: "assets/products/totebag-drift.jpg" },
+      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending", image: "assets/products/cap-horizon.jpg" },
+      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift", image: "assets/products/mug-studio.jpg" },
+      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium", image: "assets/products/candle-premium.jpg" },
+      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot", image: "assets/products/windbreaker.jpg" },
+      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value", image: "assets/products/pouch-organizer.jpg" }
     ];
 
     const categoryNames = {
@@ -711,18 +728,6 @@
     const rupiah = (n) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(n);
     const el = (id) => document.getElementById(id);
 
-    function productIconSVG() {
-      // placeholder ikon agar tidak perlu gambar eksternal
-      return `
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M22 22C22 16.477 26.477 12 32 12C37.523 12 42 16.477 42 22V24H50C51.105 24 52 24.895 52 26V50C52 51.105 51.105 52 50 52H14C12.895 52 12 51.105 12 50V26C12 24.895 12.895 24 14 24H22V22Z" stroke="rgba(244,247,255,.85)" stroke-width="2.5"/>
-          <path d="M24 24V22C24 17.582 27.582 14 32 14C36.418 14 40 17.582 40 22V24" stroke="rgba(30,230,194,.9)" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M22 34H42" stroke="rgba(255,179,138,.9)" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M22 40H36" stroke="rgba(244,247,255,.8)" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-      `;
-    }
-
     function waLink(product) {
       const msg =
         `Halo Asteria Shop, saya mau order:%0A` +
@@ -734,18 +739,34 @@
       return `https://wa.me/${WA_NUMBER}?text=${msg}`;
     }
 
+    function productFallbackSVG() {
+      return `
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+             style="width:78px; height:78px; opacity:.92; filter: drop-shadow(0 16px 30px rgba(0,0,0,.32)); position:absolute; inset:0; margin:auto;">
+          <path d="M22 22C22 16.477 26.477 12 32 12C37.523 12 42 16.477 42 22V24H50C51.105 24 52 24.895 52 26V50C52 51.105 51.105 52 50 52H14C12.895 52 12 51.105 12 50V26C12 24.895 12.895 24 14 24H22V22Z" stroke="rgba(244,247,255,.85)" stroke-width="2.5"/>
+          <path d="M24 24V22C24 17.582 27.582 14 32 14C36.418 14 40 17.582 40 22V24" stroke="rgba(30,230,194,.9)" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M22 34H42" stroke="rgba(255,179,138,.9)" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M22 40H36" stroke="rgba(244,247,255,.8)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
     function render(list) {
       const grid = el("productGrid");
       grid.innerHTML = list.map(p => `
         <article class="card" data-category="${p.category}" data-name="${p.name.toLowerCase()}" data-price="${p.price}">
           <div class="thumb">
             <div class="badge"><span class="mini-dot"></span> ${p.tag}</div>
-            ${productIconSVG()}
+            ${p.image
+              ? `<img class="thumb-img" src="${p.image}" alt="${p.name}" loading="lazy"
+                     onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend', \`${productFallbackSVG()}\`)">`
+              : productFallbackSVG()
+            }
           </div>
 
           <div class="body">
             <h3 class="title">${p.name}</h3>
-            <p class="desc">Katalog produk siap jualan. Ganti deskripsi sesuai produk asli kamu (material, size, varian).</p>
+            <p class="desc">Ganti deskripsi sesuai produk asli (material, size, varian, dll).</p>
 
             <div class="row">
               <div>
