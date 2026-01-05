@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Porto 3 — Katalog Produk (Semi E-commerce)</title>
+
+  <!-- SEO dasar -->
+  <meta name="description" content="Template katalog produk semi e-commerce siap jualan: grid produk, harga, filter, dan tombol order via WhatsApp. Cocok untuk portfolio web." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Porto 3 — Katalog Produk (Semi E-commerce)" />
+  <meta property="og:description" content="Katalog produk dengan grid, harga, filter, dan order via WhatsApp." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      /* Tema beda dari sebelumnya: Navy + Teal + Peach */
+      --bg:#070B18;
+      --surface:#0B1128;
+      --card:#0F1A3A;
+      --text:#F4F7FF;
+      --muted:#B7C2E3;
+
+      --teal:#1EE6C2;
+      --teal2:#66F0D9;
+      --peach:#FFB38A;
+      --peach2:#FFD0B7;
+
+      --line: rgba(255,255,255,.10);
+      --shadow: 0 22px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1160px;
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --ring: 0 0 0 3px rgba(30,230,194,.22);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 18% 8%, rgba(30,230,194,.16), transparent 60%),
+        radial-gradient(900px 500px at 88% 22%, rgba(255,179,138,.14), transparent 60%),
+        linear-gradient(180deg, #060913 0%, var(--bg) 55%, #050713 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* Top announcement */
+    .announce{
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(7,11,24,.65);
+      backdrop-filter: blur(14px);
+    }
+    .announce .inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      padding:10px 0;
+      color:var(--muted);
+      font-size:13px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background:linear-gradient(135deg, var(--teal), var(--teal2));
+      box-shadow: 0 0 0 4px rgba(30,230,194,.14);
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(7,11,24,.55);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+    }
+
+    /* Brand */
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .logo{
+      width:44px; height:44px;
+      border-radius:16px;
+      background:
+        radial-gradient(16px 16px at 30% 25%, rgba(255,255,255,.18), transparent 60%),
+        linear-gradient(135deg, rgba(30,230,194,.98), rgba(255,179,138,.88));
+      box-shadow:
+        0 18px 46px rgba(30,230,194,.18),
+        inset 0 0 0 1px rgba(0,0,0,.35);
+      display:grid; place-items:center;
+    }
+    .logo svg{width:28px; height:28px; filter: drop-shadow(0 10px 22px rgba(0,0,0,.35))}
+    .brand-text{display:flex; flex-direction:column; line-height:1.05}
+    .brand-text strong{font-size:14.5px}
+    .brand-text span{font-size:12.5px; color:rgba(244,247,255,.78); font-weight:750; letter-spacing:.35px}
+
+    nav ul{list-style:none; display:flex; gap:10px; padding:0; margin:0}
+    nav a{
+      color:var(--muted);
+      font-size:14px;
+      padding:10px 10px;
+      border-radius:12px;
+      transition:.2s ease;
+    }
+    nav a:hover{background:rgba(255,255,255,.05); color:var(--text)}
+
+    .nav-right{display:flex; align-items:center; gap:10px}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:800;
+      font-size:14px;
+      transition:.2s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.14);
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.20)}
+    .btn:focus{outline:none; box-shadow: var(--ring)}
+    .btn-primary{
+      border:0;
+      background:linear-gradient(135deg, rgba(30,230,194,.98), rgba(255,179,138,.92));
+      color:#071118;
+      box-shadow: 0 18px 44px rgba(30,230,194,.18);
+    }
+    .btn-soft{
+      border:1px solid rgba(30,230,194,.22);
+      background:rgba(30,230,194,.08);
+      color:var(--text);
+    }
+    .btn-small{padding:10px 12px; border-radius:12px; font-size:13px}
+    .btn-block{width:100%}
+
+    /* Search */
+    .search{
+      display:flex; align-items:center; gap:10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      padding:10px 12px;
+      min-width: 280px;
+    }
+    .search input{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font: inherit;
+      font-size:14px;
+    }
+    .search .hint{color:rgba(183,194,227,.85); font-size:13px}
+
+    /* Mobile menu */
+    .menu-btn{
+      display:none;
+      width:42px; height:42px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      cursor:pointer;
+    }
+    .mobile-panel{
+      display:none;
+      padding:10px 0 14px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .mobile-panel a{
+      display:block;
+      padding:12px 12px;
+      border-radius:14px;
+      color:var(--muted);
+    }
+    .mobile-panel a:hover{background:rgba(255,255,255,.05); color:var(--text)}
+    .mobile-panel.open{display:block}
+
+    /* Hero */
+    .hero{
+      padding:44px 0 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:
+        radial-gradient(700px 320px at 20% 10%, rgba(30,230,194,.18), transparent 55%),
+        radial-gradient(760px 320px at 92% 25%, rgba(255,179,138,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .hero .container{position:relative}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(30,230,194,.22);
+      background:rgba(255,255,255,.03);
+      color:rgba(244,247,255,.82);
+      font-size:13.5px;
+    }
+    .h1{
+      margin:14px 0 8px;
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    .accent{
+      background:linear-gradient(135deg, var(--teal), var(--peach));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .lead{
+      margin:0;
+      color:rgba(244,247,255,.82);
+      font-size:16px;
+      line-height:1.75;
+      max-width: 66ch;
+    }
+
+    .hero-card{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(8,12,24,.55);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .stat{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .stat strong{display:block; font-size:16px}
+    .stat span{display:block; color:var(--muted); margin-top:4px; font-size:13px; line-height:1.5}
+
+    /* Controls */
+    .controls{
+      padding:18px 0 6px;
+    }
+    .controls-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .select{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      font: inherit;
+      font-size:14px;
+      outline:none;
+    }
+
+    /* Products grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+      padding:12px 0 36px;
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      box-shadow: 0 18px 42px rgba(0,0,0,.22);
+      overflow:hidden;
+      transition:.2s ease;
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(30,230,194,.22)}
+
+    .thumb{
+      position:relative;
+      aspect-ratio: 4 / 3;
+      overflow:hidden;
+      background:
+        radial-gradient(180px 120px at 20% 20%, rgba(30,230,194,.18), transparent 55%),
+        radial-gradient(220px 140px at 85% 35%, rgba(255,179,138,.14), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:grid;
+      place-items:center;
+    }
+    .thumb svg{width:78px; height:78px; opacity:.92; filter: drop-shadow(0 16px 30px rgba(0,0,0,.32))}
+    .badge{
+      position:absolute;
+      top:10px; left:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      font-size:12.5px;
+      color:rgba(244,247,255,.86);
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .badge .mini-dot{
+      width:7px; height:7px; border-radius:999px;
+      background:linear-gradient(135deg, var(--peach), var(--peach2));
+      box-shadow: 0 0 0 4px rgba(255,179,138,.12);
+    }
+
+    .body{
+      padding:14px 14px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex:1;
+    }
+    .title{margin:0; font-size:15.5px; line-height:1.3}
+    .desc{margin:0; color:var(--muted); font-size:13.5px; line-height:1.65}
+    .row{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-top:auto;
+    }
+    .price{
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .strike{
+      font-size:12.5px;
+      color:rgba(183,194,227,.86);
+      text-decoration: line-through;
+      margin-left:6px;
+      font-weight:650;
+    }
+    .cta{
+      display:flex; gap:10px;
+    }
+
+    /* Floating cart-ish */
+    .float-wa{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:60;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(7,11,24,.62);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+    .float-wa .bubble{
+      width:36px; height:36px; border-radius:14px;
+      background:linear-gradient(135deg, rgba(30,230,194,.98), rgba(255,179,138,.92));
+      display:grid; place-items:center;
+      color:#071118;
+      font-weight:900;
+    }
+    .float-wa span{font-size:13.5px; color:var(--muted)}
+    .float-wa strong{display:block; color:var(--text); font-size:14px; margin-top:1px}
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:24px 0 44px;
+      color:var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px){
+      .grid{grid-template-columns: repeat(3, 1fr)}
+    }
+    @media (max-width: 980px){
+      nav ul{display:none}
+      .menu-btn{display:inline-flex}
+      .search{display:none}
+      .hero-grid{grid-template-columns:1fr; gap:12px}
+      .h1{font-size:38px}
+      .grid{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width: 520px){
+      .h1{font-size:32px}
+      .grid{grid-template-columns: 1fr}
+      .float-wa span{display:none}
+      .float-wa{padding:10px}
+      .cta{flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="announce">
+    <div class="container">
+      <div class="inner">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="pill"><span class="dot"></span> Porto 3 • Katalog / Semi E-commerce</span>
+          <span class="pill">🚚 Pengiriman cepat (contoh)</span>
+          <span class="pill">⭐ Produk best seller</span>
+        </div>
+        <span class="pill">📱 Order via WhatsApp</span>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Asteria Shop">
+          <span class="logo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 6L54 18V46L32 58L10 46V18L32 6Z" fill="#071118" opacity="0.25"/>
+              <path d="M20 36C26 22 38 18 44 28C48 36 41 45 32 48C23 45 16 40 20 36Z" fill="#071118"/>
+              <path d="M18 24L32 14L46 24" stroke="#071118" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+            </svg>
+          </span>
+          <span class="brand-text">
+            <strong>Asteria Shop</strong>
+            <span>CATALOG READY</span>
+          </span>
+        </a>
+
+        <nav aria-label="Navigasi">
+          <ul>
+            <li><a href="#catalog">Katalog</a></li>
+            <li><a href="#how">Cara Order</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-right">
+          <div class="search" aria-label="Pencarian produk">
+            <span class="hint">🔎</span>
+            <input id="searchInput" type="search" placeholder="Cari produk… (contoh: hoodie)" />
+          </div>
+
+          <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">☰</button>
+
+          <a class="btn btn-small btn-soft" href="#how">Cara Order</a>
+          <a class="btn btn-small btn-primary" target="_blank"
+             href="https://wa.me/6281234567890?text=Halo%20Asteria%20Shop,%20saya%20mau%20tanya%20produk.">
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="mobile-panel" id="mobilePanel">
+        <a href="#catalog" onclick="closeMenu()">Katalog</a>
+        <a href="#how" onclick="closeMenu()">Cara Order</a>
+        <a href="#faq" onclick="closeMenu()">FAQ</a>
+        <a class="btn btn-primary btn-block" style="margin-top:10px;" target="_blank"
+           href="https://wa.me/6281234567890?text=Halo%20Asteria%20Shop,%20saya%20mau%20tanya%20produk."
+           onclick="closeMenu()">
+          Chat WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker"><span class="dot"></span> Katalog modern + tombol order WA per produk</div>
+          <h1 class="h1">Website <span class="accent">siap jualan</span> untuk brand kamu.</h1>
+          <p class="lead">
+            Template ini menampilkan grid produk, harga, search & filter sederhana, serta tombol
+            <b>Order via WhatsApp</b> yang otomatis mengirim pesan produk yang dipilih.
+          </p>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <a class="btn btn-primary" href="#catalog">Lihat Katalog</a>
+            <a class="btn btn-soft" href="#how">Cara Order</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Info toko">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+            <h2 style="margin:0; font-size:18px;">Info Toko</h2>
+            <span class="pill" style="margin:0;">Live Stock (contoh)</span>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>48 Jam</strong>
+              <span>Proses pesanan rata-rata (contoh)</span>
+            </div>
+            <div class="stat">
+              <strong>COD</strong>
+              <span>Tersedia area tertentu (contoh)</span>
+            </div>
+            <div class="stat">
+              <strong>Garansi</strong>
+              <span>Tukar size/warna 24 jam (contoh)</span>
+            </div>
+            <div class="stat">
+              <strong>Support</strong>
+              <span>CS WhatsApp fast response</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Controls -->
+  <section class="controls" id="catalog">
+    <div class="container">
+      <div class="controls-row">
+        <div class="filters">
+          <select class="select" id="categorySelect" aria-label="Filter kategori">
+            <option value="all">Semua Kategori</option>
+            <option value="apparel">Apparel</option>
+            <option value="accessories">Accessories</option>
+            <option value="home">Home</option>
+          </select>
+
+          <select class="select" id="sortSelect" aria-label="Urutkan">
+            <option value="featured">Urutkan: Unggulan</option>
+            <option value="low">Harga: Terendah</option>
+            <option value="high">Harga: Tertinggi</option>
+          </select>
+
+          <span class="pill" id="countPill">0 produk</span>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <a class="btn btn-small btn-soft" href="#faq">FAQ</a>
+          <a class="btn btn-small btn-primary" target="_blank"
+             href="https://wa.me/6281234567890?text=Halo%20Asteria%20Shop,%20saya%20ingin%20order.">
+            Order via WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="grid" id="productGrid" aria-label="Grid produk">
+        <!-- Diisi via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- How to order -->
+  <section id="how">
+    <div class="container">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div>
+          <h2 style="margin:0; font-size:26px; letter-spacing:-.3px;">Cara Order</h2>
+          <p style="margin:6px 0 0; color:var(--muted); line-height:1.75; max-width:70ch;">
+            Konsep semi e-commerce: checkout lewat WhatsApp tapi tetap tampil profesional dan siap jualan.
+          </p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:14px;">
+        <div class="card" style="padding:16px;">
+          <div class="badge" style="position:static; width:max-content;"><span class="mini-dot"></span> Step 1</div>
+          <h3 style="margin:10px 0 6px; font-size:16px;">Pilih produk</h3>
+          <p class="desc">Gunakan search / filter untuk menemukan produk yang kamu mau.</p>
+        </div>
+        <div class="card" style="padding:16px;">
+          <div class="badge" style="position:static; width:max-content;"><span class="mini-dot"></span> Step 2</div>
+          <h3 style="margin:10px 0 6px; font-size:16px;">Klik Order WA</h3>
+          <p class="desc">Pesan WA otomatis terisi nama produk + harga + catatan.</p>
+        </div>
+        <div class="card" style="padding:16px;">
+          <div class="badge" style="position:static; width:max-content;"><span class="mini-dot"></span> Step 3</div>
+          <h3 style="margin:10px 0 6px; font-size:16px;">Konfirmasi & bayar</h3>
+          <p class="desc">Admin konfirmasi stok, ongkir, lalu kirim invoice/pembayaran.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2 style="margin:0 0 10px; font-size:26px; letter-spacing:-.3px;">FAQ</h2>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+        <details class="card" style="padding:16px;">
+          <summary style="cursor:pointer; font-weight:850;">Apakah ini sudah siap dipakai jualan?</summary>
+          <p class="desc" style="margin-top:10px;">Ya. Tinggal ganti nama toko, nomor WhatsApp, dan data produk.</p>
+        </details>
+        <details class="card" style="padding:16px;">
+          <summary style="cursor:pointer; font-weight:850;">Bisa pakai foto produk sendiri?</summary>
+          <p class="desc" style="margin-top:10px;">Bisa. Kamu bisa ganti thumbnail SVG jadi gambar <code>&lt;img&gt;</code>.</p>
+        </details>
+        <details class="card" style="padding:16px;">
+          <summary style="cursor:pointer; font-weight:850;">Bisa tambah kategori / filter?</summary>
+          <p class="desc" style="margin-top:10px;">Bisa. Tinggal tambah field kategori pada data produk dan opsi filter.</p>
+        </details>
+        <details class="card" style="padding:16px;">
+          <summary style="cursor:pointer; font-weight:850;">Bisa dibuat checkout seperti marketplace?</summary>
+          <p class="desc" style="margin-top:10px;">Bisa, tapi butuh backend. Versi ini fokus “semi e-commerce” via WA.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+      <div>
+        <div class="brand" style="opacity:.95">
+          <span class="logo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 6L54 18V46L32 58L10 46V18L32 6Z" fill="#071118" opacity="0.25"/>
+              <path d="M20 36C26 22 38 18 44 28C48 36 41 45 32 48C23 45 16 40 20 36Z" fill="#071118"/>
+              <path d="M18 24L32 14L46 24" stroke="#071118" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+            </svg>
+          </span>
+          <span class="brand-text">
+            <strong>Asteria Shop</strong>
+            <span>SEMI E-COMMERCE</span>
+          </span>
+        </div>
+        <div style="margin-top:8px; font-size:13px; color:rgba(183,194,227,.95)">
+          © <span id="year"></span> Asteria Shop. Template katalog siap jualan via WhatsApp.
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn btn-small" href="#catalog">Katalog</a>
+        <a class="btn btn-small" href="#how">Cara Order</a>
+        <a class="btn btn-small" href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="float-wa" target="_blank"
+     href="https://wa.me/6281234567890?text=Halo%20Asteria%20Shop,%20saya%20ingin%20order.">
+    <div class="bubble">WA</div>
+    <div>
+      <span>Siap checkout?</span>
+      <strong>Order via WhatsApp</strong>
+    </div>
+  </a>
+
+  <script>
+    // ====== CONFIG ======
+    const WA_NUMBER = "6281234567890"; // ganti nomor WA kamu
+
+    // Data produk contoh (untuk portfolio)
+    const products = [
+      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller" },
+      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New" },
+      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited" },
+      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending" },
+      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift" },
+      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium" },
+      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot" },
+      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value" }
+    ];
+
+    const categoryNames = {
+      all: "Semua",
+      apparel: "Apparel",
+      accessories: "Accessories",
+      home: "Home"
+    };
+
+    // ====== HELPERS ======
+    const rupiah = (n) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(n);
+    const el = (id) => document.getElementById(id);
+
+    function productIconSVG() {
+      // placeholder ikon agar tidak perlu gambar eksternal
+      return `
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M22 22C22 16.477 26.477 12 32 12C37.523 12 42 16.477 42 22V24H50C51.105 24 52 24.895 52 26V50C52 51.105 51.105 52 50 52H14C12.895 52 12 51.105 12 50V26C12 24.895 12.895 24 14 24H22V22Z" stroke="rgba(244,247,255,.85)" stroke-width="2.5"/>
+          <path d="M24 24V22C24 17.582 27.582 14 32 14C36.418 14 40 17.582 40 22V24" stroke="rgba(30,230,194,.9)" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M22 34H42" stroke="rgba(255,179,138,.9)" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M22 40H36" stroke="rgba(244,247,255,.8)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    function waLink(product) {
+      const msg =
+        `Halo Asteria Shop, saya mau order:%0A` +
+        `Produk: ${encodeURIComponent(product.name)}%0A` +
+        `Kategori: ${encodeURIComponent(categoryNames[product.category] || product.category)}%0A` +
+        `Harga: ${encodeURIComponent(rupiah(product.price))}%0A` +
+        `Qty: 1%0A` +
+        `Catatan: (warna/size/alamat)%0A`;
+      return `https://wa.me/${WA_NUMBER}?text=${msg}`;
+    }
+
+    function render(list) {
+      const grid = el("productGrid");
+      grid.innerHTML = list.map(p => `
+        <article class="card" data-category="${p.category}" data-name="${p.name.toLowerCase()}" data-price="${p.price}">
+          <div class="thumb">
+            <div class="badge"><span class="mini-dot"></span> ${p.tag}</div>
+            ${productIconSVG()}
+          </div>
+
+          <div class="body">
+            <h3 class="title">${p.name}</h3>
+            <p class="desc">Katalog produk siap jualan. Ganti deskripsi sesuai produk asli kamu (material, size, varian).</p>
+
+            <div class="row">
+              <div>
+                <div class="price">${rupiah(p.price)} <span class="strike">${rupiah(p.compareAt)}</span></div>
+                <div style="margin-top:4px; color:rgba(183,194,227,.92); font-size:12.8px;">
+                  Kategori: <b style="color:rgba(244,247,255,.9)">${categoryNames[p.category] || p.category}</b>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta">
+              <a class="btn btn-soft btn-block" href="#how">Detail</a>
+              <a class="btn btn-primary btn-block" target="_blank" href="${waLink(p)}">Order WA</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      el("countPill").textContent = `${list.length} produk`;
+    }
+
+    function applyFilters() {
+      const q = (el("searchInput")?.value || "").trim().toLowerCase();
+      const cat = el("categorySelect").value;
+      const sort = el("sortSelect").value;
+
+      let list = products.filter(p => {
+        const matchQuery = !q || p.name.toLowerCase().includes(q);
+        const matchCat = (cat === "all") || p.category === cat;
+        return matchQuery && matchCat;
+      });
+
+      if (sort === "low") list.sort((a,b) => a.price - b.price);
+      if (sort === "high") list.sort((a,b) => b.price - a.price);
+
+      render(list);
+    }
+
+    // ====== INIT ======
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu
+    const btn = document.getElementById("menuBtn");
+    const panel = document.getElementById("mobilePanel");
+    btn.addEventListener("click", () => {
+      const open = panel.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "✕" : "☰";
+    });
+    function closeMenu(){
+      panel.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      btn.textContent = "☰";
+    }
+    window.closeMenu = closeMenu;
+
+    // Controls listeners
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
+    document.getElementById("categorySelect").addEventListener("change", applyFilters);
+    document.getElementById("sortSelect").addEventListener("change", applyFilters);
+
+    // First render
+    applyFilters();
+  </script>
+</body>
+</html>
