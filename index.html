@@ -5,21 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Porto 3 — Katalog Produk (Semi E-commerce)</title>
 
-  <!-- SEO dasar -->
   <meta name="description" content="Template katalog produk semi e-commerce siap jualan: grid produk, harga, filter, dan tombol order via WhatsApp. Cocok untuk portfolio web." />
   <meta name="robots" content="index,follow" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Porto 3 — Katalog Produk (Semi E-commerce)" />
-  <meta property="og:description" content="Katalog produk dengan grid, harga, filter, dan order via WhatsApp." />
-  <meta property="og:type" content="website" />
-
   <style>
     :root{
-      /* Tema beda: Navy + Teal + Peach */
+      /* Tema: Navy + Teal + Peach */
       --bg:#070B18;
-      --surface:#0B1128;
-      --card:#0F1A3A;
       --text:#F4F7FF;
       --muted:#B7C2E3;
 
@@ -28,7 +20,6 @@
       --peach:#FFB38A;
       --peach2:#FFD0B7;
 
-      --line: rgba(255,255,255,.10);
       --shadow: 0 22px 60px rgba(0,0,0,.45);
       --radius: 18px;
       --radius2: 26px;
@@ -127,7 +118,6 @@
       transition:.2s ease;
     }
     nav a:hover{background:rgba(255,255,255,.05); color:var(--text)}
-
     .nav-right{display:flex; align-items:center; gap:10px}
 
     /* Buttons */
@@ -327,27 +317,27 @@
       position:relative;
       aspect-ratio: 4 / 3;
       overflow:hidden;
+      display:block;
       background:
         radial-gradient(180px 120px at 20% 20%, rgba(30,230,194,.18), transparent 55%),
         radial-gradient(220px 140px at 85% 35%, rgba(255,179,138,.14), transparent 55%),
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      display:block;
     }
 
-    /* ==== GAMBAR PRODUK (lebih besar & ngepas kotak) ==== */
+    /* ==== FIX UTAMA: gambar dibuat "penuh kotak" ==== */
+    /* Default pakai COVER biar penuh 1 kotak. Kalau ada whitespace, kita zoom besar. */
     .thumb-img{
       width:100%;
       height:100%;
-      object-fit: contain;               /* cocok untuk PNG/produk */
+      object-fit: cover;                /* <-- bikin gambar penuh kotak */
       object-position: center;
       display:block;
-      padding: 14px;                     /* rapi */
-      transform: scale(var(--zoom, 1.15)); /* default lebih besar */
+      transform: scale(var(--zoom, 1.22)); /* <-- default zoom lebih besar */
       transition: transform .2s ease;
       filter: saturate(1.05) contrast(1.05);
     }
     .card:hover .thumb-img{
-      transform: scale(calc(var(--zoom, 1.15) + 0.04));
+      transform: scale(calc(var(--zoom, 1.22) + 0.05));
     }
 
     .badge{
@@ -394,9 +384,7 @@
       margin-left:6px;
       font-weight:650;
     }
-    .cta{
-      display:flex; gap:10px;
-    }
+    .cta{display:flex; gap:10px}
 
     /* Floating WhatsApp */
     .float-wa{
@@ -424,7 +412,6 @@
     .float-wa span{font-size:13.5px; color:var(--muted)}
     .float-wa strong{display:block; color:var(--text); font-size:14px; margin-top:1px}
 
-    /* Footer */
     footer{
       border-top:1px solid rgba(255,255,255,.08);
       padding:24px 0 44px;
@@ -461,7 +448,7 @@
       assets/products/hoodie-nimbus.jpg
       assets/products/tshirt-aurora.jpg
       assets/products/totebag-drift.jpg
-      assets/products/cap-horizon.jpg  <-- ini untuk Cap Horizon
+      assets/products/cap-horizon.jpg
   -->
 
   <div class="announce">
@@ -531,7 +518,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <main id="top" class="hero">
     <div class="container">
       <div class="hero-grid">
@@ -556,29 +542,16 @@
           </div>
 
           <div class="stats">
-            <div class="stat">
-              <strong>48 Jam</strong>
-              <span>Proses pesanan rata-rata (contoh)</span>
-            </div>
-            <div class="stat">
-              <strong>COD</strong>
-              <span>Tersedia area tertentu (contoh)</span>
-            </div>
-            <div class="stat">
-              <strong>Garansi</strong>
-              <span>Tukar size/warna 24 jam (contoh)</span>
-            </div>
-            <div class="stat">
-              <strong>Support</strong>
-              <span>CS WhatsApp fast response</span>
-            </div>
+            <div class="stat"><strong>48 Jam</strong><span>Proses pesanan rata-rata (contoh)</span></div>
+            <div class="stat"><strong>COD</strong><span>Tersedia area tertentu (contoh)</span></div>
+            <div class="stat"><strong>Garansi</strong><span>Tukar size/warna 24 jam (contoh)</span></div>
+            <div class="stat"><strong>Support</strong><span>CS WhatsApp fast response</span></div>
           </div>
         </aside>
       </div>
     </div>
   </main>
 
-  <!-- Controls -->
   <section class="controls" id="catalog">
     <div class="container">
       <div class="controls-row">
@@ -612,19 +585,14 @@
     </div>
   </section>
 
-  <!-- How to order -->
   <section id="how">
     <div class="container">
-      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-        <div>
-          <h2 style="margin:0; font-size:26px; letter-spacing:-.3px;">Cara Order</h2>
-          <p style="margin:6px 0 0; color:var(--muted); line-height:1.75; max-width:70ch;">
-            Konsep semi e-commerce: checkout lewat WhatsApp tapi tetap tampil profesional dan siap jualan.
-          </p>
-        </div>
-      </div>
+      <h2 style="margin:0 0 10px; font-size:26px; letter-spacing:-.3px;">Cara Order</h2>
+      <p style="margin:0 0 14px; color:var(--muted); line-height:1.75; max-width:70ch;">
+        Konsep semi e-commerce: checkout lewat WhatsApp tapi tetap tampil profesional dan siap jualan.
+      </p>
 
-      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:14px;">
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;">
         <div class="card" style="padding:16px;">
           <div class="badge" style="position:static; width:max-content;"><span class="mini-dot"></span> Step 1</div>
           <h3 style="margin:10px 0 6px; font-size:16px;">Pilih produk</h3>
@@ -644,29 +612,22 @@
     </div>
   </section>
 
-  <!-- FAQ -->
   <section id="faq">
     <div class="container">
       <h2 style="margin:0 0 10px; font-size:26px; letter-spacing:-.3px;">FAQ</h2>
-
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
         <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Apakah ini sudah siap dipakai jualan?</summary>
-          <p class="desc" style="margin-top:10px;">Ya. Tinggal ganti nama toko, nomor WhatsApp, dan data produk + gambar.</p>
-        </details>
-        <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Foto Cap Horizon taruh di mana?</summary>
+          <summary style="cursor:pointer; font-weight:850;">Kenapa gambar masih kecil?</summary>
           <p class="desc" style="margin-top:10px;">
-            Simpan file: <b>assets/products/cap-horizon.jpg</b> (atau .png), lalu pastikan path-nya sama di data produk.
+            Itu karena file foto punya whitespace. Di template ini sudah dipaksa penuh kotak pakai
+            <b>object-fit: cover</b> + <b>zoom</b>.
           </p>
         </details>
         <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Kenapa gambar kecil?</summary>
-          <p class="desc" style="margin-top:10px;">Biasanya karena gambar punya whitespace. Solusi: zoom per produk (sudah ada field <b>zoom</b>).</p>
-        </details>
-        <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Bisa dibuat checkout seperti marketplace?</summary>
-          <p class="desc" style="margin-top:10px;">Bisa, tapi butuh backend. Versi ini fokus “semi e-commerce” via WA.</p>
+          <summary style="cursor:pointer; font-weight:850;">Cara pasang foto Cap Horizon?</summary>
+          <p class="desc" style="margin-top:10px;">
+            Simpan file: <b>assets/products/cap-horizon.jpg</b> lalu pastikan path-nya sama di data produk.
+          </p>
         </details>
       </div>
     </div>
@@ -674,25 +635,9 @@
 
   <footer>
     <div class="container" style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-      <div>
-        <div class="brand" style="opacity:.95">
-          <span class="logo" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 6L54 18V46L32 58L10 46V18L32 6Z" fill="#071118" opacity="0.25"/>
-              <path d="M20 36C26 22 38 18 44 28C48 36 41 45 32 48C23 45 16 40 20 36Z" fill="#071118"/>
-              <path d="M18 24L32 14L46 24" stroke="#071118" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
-            </svg>
-          </span>
-          <span class="brand-text">
-            <strong>Asteria Shop</strong>
-            <span>SEMI E-COMMERCE</span>
-          </span>
-        </div>
-        <div style="margin-top:8px; font-size:13px; color:rgba(183,194,227,.95)">
-          © <span id="year"></span> Asteria Shop. Template katalog siap jualan via WhatsApp.
-        </div>
+      <div style="color:rgba(183,194,227,.95); font-size:13px;">
+        © <span id="year"></span> Asteria Shop — Template katalog siap jualan via WhatsApp.
       </div>
-
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
         <a class="btn btn-small" href="#catalog">Katalog</a>
         <a class="btn btn-small" href="#how">Cara Order</a>
@@ -711,21 +656,20 @@
   </a>
 
   <script>
-    // ====== CONFIG ======
     const WA_NUMBER = "6281234567890"; // ganti nomor WA kamu
 
-    // ====== DATA PRODUK (ISI PATH GAMBAR DI image) ======
-    // TARUH GAMBAR DI: assets/products/
-    // Cap Horizon: assets/products/cap-horizon.jpg
+    // DATA PRODUK:
+    // - isi image dengan path file yang benar
+    // - zoom: makin besar angkanya, makin besar gambar (contoh 1.35 - 1.70)
     const products = [
-      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller", image: "assets/products/hoodie-nimbus.jpg", zoom: 1.35 },
-      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New", image: "assets/products/tshirt-aurora.jpg", zoom: 1.35 },
-      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited", image: "assets/products/totebag-drift.jpg", zoom: 1.25 },
-      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending", image: "assets/products/cap-horizon.jpg", zoom: 1.55 },
-      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift", image: "assets/products/mug-studio.jpg", zoom: 1.30 },
-      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium", image: "assets/products/candle-premium.jpg", zoom: 1.30 },
-      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot", image: "assets/products/windbreaker.jpg", zoom: 1.35 },
-      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value", image: "assets/products/pouch-organizer.jpg", zoom: 1.40 }
+      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller", image: "assets/products/hoodie-nimbus.jpg", zoom: 1.55 },
+      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New", image: "assets/products/tshirt-aurora.jpg", zoom: 1.65 },
+      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited", image: "assets/products/totebag-drift.jpg", zoom: 1.55 },
+      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending", image: "assets/products/cap-horizon.jpg", zoom: 1.75 },
+      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift", image: "assets/products/mug-studio.jpg", zoom: 1.65 },
+      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium", image: "assets/products/candle-premium.jpg", zoom: 1.60 },
+      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot", image: "assets/products/windbreaker.jpg", zoom: 1.60 },
+      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value", image: "assets/products/pouch-organizer.jpg", zoom: 1.75 }
     ];
 
     const categoryNames = {
@@ -735,7 +679,6 @@
       home: "Home"
     };
 
-    // ====== HELPERS ======
     const rupiah = (n) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(n);
     const el = (id) => document.getElementById(id);
 
@@ -765,11 +708,7 @@
     function render(list) {
       const grid = el("productGrid");
       grid.innerHTML = list.map(p => `
-        <article class="card"
-          style="--zoom:${p.zoom || 1.15}"
-          data-category="${p.category}"
-          data-name="${p.name.toLowerCase()}"
-          data-price="${p.price}">
+        <article class="card" style="--zoom:${p.zoom || 1.22}">
           <div class="thumb">
             <div class="badge"><span class="mini-dot"></span> ${p.tag}</div>
             ${p.image
@@ -820,7 +759,6 @@
       render(list);
     }
 
-    // ====== INIT ======
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Mobile menu
@@ -838,13 +776,13 @@
     }
     window.closeMenu = closeMenu;
 
-    // Controls listeners
+    // Listeners
     const searchInput = document.getElementById("searchInput");
     if (searchInput) searchInput.addEventListener("input", applyFilters);
     document.getElementById("categorySelect").addEventListener("change", applyFilters);
     document.getElementById("sortSelect").addEventListener("change", applyFilters);
 
-    // First render
+    // Init render
     applyFilters();
   </script>
 </body>
