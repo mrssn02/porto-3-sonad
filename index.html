@@ -334,14 +334,20 @@
       display:block;
     }
 
-    /* ==== GAMBAR PRODUK ==== */
+    /* ==== GAMBAR PRODUK (lebih besar & ngepas kotak) ==== */
     .thumb-img{
       width:100%;
       height:100%;
-      object-fit: cover;         /* rapi crop */
+      object-fit: contain;               /* cocok untuk PNG/produk */
+      object-position: center;
       display:block;
-      transform: scale(1.02);
+      padding: 14px;                     /* rapi */
+      transform: scale(var(--zoom, 1.15)); /* default lebih besar */
+      transition: transform .2s ease;
       filter: saturate(1.05) contrast(1.05);
+    }
+    .card:hover .thumb-img{
+      transform: scale(calc(var(--zoom, 1.15) + 0.04));
     }
 
     .badge{
@@ -448,8 +454,15 @@
 </head>
 
 <body>
-  <!-- NOTE: simpan gambar produk di folder: assets/products/ -->
-  <!-- contoh: assets/products/hoodie-nimbus.jpg -->
+  <!--
+    CARA TARUH GAMBAR:
+    - Buat folder: assets/products/
+    - Taruh gambar, contoh:
+      assets/products/hoodie-nimbus.jpg
+      assets/products/tshirt-aurora.jpg
+      assets/products/totebag-drift.jpg
+      assets/products/cap-horizon.jpg  <-- ini untuk Cap Horizon
+  -->
 
   <div class="announce">
     <div class="container">
@@ -595,9 +608,7 @@
         </div>
       </div>
 
-      <div class="grid" id="productGrid" aria-label="Grid produk">
-        <!-- Diisi via JS -->
-      </div>
+      <div class="grid" id="productGrid" aria-label="Grid produk"></div>
     </div>
   </section>
 
@@ -644,14 +655,14 @@
           <p class="desc" style="margin-top:10px;">Ya. Tinggal ganti nama toko, nomor WhatsApp, dan data produk + gambar.</p>
         </details>
         <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Cara taruh gambar produk gimana?</summary>
+          <summary style="cursor:pointer; font-weight:850;">Foto Cap Horizon taruh di mana?</summary>
           <p class="desc" style="margin-top:10px;">
-            Buat folder <b>assets/products</b>, taruh gambar di situ, lalu isi field <b>image</b> pada data produk.
+            Simpan file: <b>assets/products/cap-horizon.jpg</b> (atau .png), lalu pastikan path-nya sama di data produk.
           </p>
         </details>
         <details class="card" style="padding:16px;">
-          <summary style="cursor:pointer; font-weight:850;">Bisa tambah kategori / filter?</summary>
-          <p class="desc" style="margin-top:10px;">Bisa. Tinggal tambah field kategori pada data produk dan opsi filter.</p>
+          <summary style="cursor:pointer; font-weight:850;">Kenapa gambar kecil?</summary>
+          <p class="desc" style="margin-top:10px;">Biasanya karena gambar punya whitespace. Solusi: zoom per produk (sudah ada field <b>zoom</b>).</p>
         </details>
         <details class="card" style="padding:16px;">
           <summary style="cursor:pointer; font-weight:850;">Bisa dibuat checkout seperti marketplace?</summary>
@@ -704,17 +715,17 @@
     const WA_NUMBER = "6281234567890"; // ganti nomor WA kamu
 
     // ====== DATA PRODUK (ISI PATH GAMBAR DI image) ======
-    // Simpan file gambar di: assets/products/
-    // Contoh: assets/products/hoodie-nimbus.jpg
+    // TARUH GAMBAR DI: assets/products/
+    // Cap Horizon: assets/products/cap-horizon.jpg
     const products = [
-      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller", image: "assets/products/hoodie-nimbus.jpg" },
-      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New", image: "assets/products/tshirt-aurora.jpg" },
-      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited", image: "assets/products/totebag-drift.jpg" },
-      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending", image: "assets/products/cap-horizon.jpg" },
-      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift", image: "assets/products/mug-studio.jpg" },
-      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium", image: "assets/products/candle-premium.jpg" },
-      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot", image: "assets/products/windbreaker.jpg" },
-      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value", image: "assets/products/pouch-organizer.jpg" }
+      { id: 1, name: "Hoodie Nimbus", category: "apparel", price: 189000, compareAt: 229000, tag: "Best Seller", image: "assets/products/hoodie-nimbus.jpg", zoom: 1.35 },
+      { id: 2, name: "T-Shirt Aurora", category: "apparel", price: 99000, compareAt: 129000, tag: "New", image: "assets/products/tshirt-aurora.jpg", zoom: 1.35 },
+      { id: 3, name: "Totebag Drift", category: "accessories", price: 79000, compareAt: 99000, tag: "Limited", image: "assets/products/totebag-drift.jpg", zoom: 1.25 },
+      { id: 4, name: "Cap Horizon", category: "accessories", price: 69000, compareAt: 89000, tag: "Trending", image: "assets/products/cap-horizon.jpg", zoom: 1.55 },
+      { id: 5, name: "Mug Studio", category: "home", price: 85000, compareAt: 105000, tag: "Gift", image: "assets/products/mug-studio.jpg", zoom: 1.30 },
+      { id: 6, name: "Scented Candle", category: "home", price: 125000, compareAt: 149000, tag: "Premium", image: "assets/products/candle-premium.jpg", zoom: 1.30 },
+      { id: 7, name: "Jaket Windbreaker", category: "apparel", price: 249000, compareAt: 299000, tag: "Hot", image: "assets/products/windbreaker.jpg", zoom: 1.35 },
+      { id: 8, name: "Pouch Organizer", category: "accessories", price: 59000, compareAt: 79000, tag: "Value", image: "assets/products/pouch-organizer.jpg", zoom: 1.40 }
     ];
 
     const categoryNames = {
@@ -754,7 +765,11 @@
     function render(list) {
       const grid = el("productGrid");
       grid.innerHTML = list.map(p => `
-        <article class="card" data-category="${p.category}" data-name="${p.name.toLowerCase()}" data-price="${p.price}">
+        <article class="card"
+          style="--zoom:${p.zoom || 1.15}"
+          data-category="${p.category}"
+          data-name="${p.name.toLowerCase()}"
+          data-price="${p.price}">
           <div class="thumb">
             <div class="badge"><span class="mini-dot"></span> ${p.tag}</div>
             ${p.image
